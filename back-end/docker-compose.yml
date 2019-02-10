@@ -1,0 +1,22 @@
+version: "3"
+
+services:
+    backend:
+        container_name: backend
+        image: node:10.15.0
+        working_dir: /usr/src/app/
+        command: bash -c 'npm i && npm run start'
+        volumes:    
+            - "./:/usr/src/app/"
+        ports:    
+            - "3000:3000"
+    database:
+      image: postgres:10
+      environment:
+        - POSTGRES_USER=backendILoveIt
+        - POSTGRES_PASSWORD=backendILoveIt
+        - POSTGRES_DB=development
+      ports:
+        - 5432:5432
+      volumes:
+        - database_data:/var/lib/postgresql/data
