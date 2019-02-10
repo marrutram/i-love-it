@@ -1,22 +1,26 @@
-version: "3"
+version: "3.1"
 
 services:
+    postgres:
+        container_name: postgres-i-love-it
+        image: postgres:10
+        environment:
+          - POSTGRES_USER=backendiloveit
+          - POSTGRES_PASSWORD=backendiloveit
+          - POSTGRES_DB=development
+        ports:
+          - 5432:5432
+        volumes:
+          - ./db:/var/lib/postgresql/data
+
     backend:
-        container_name: backend
+        container_name: backend-i-love-it
         image: node:10.15.0
         working_dir: /usr/src/app/
         command: bash -c 'npm i && npm run start'
+        depends_on: 
+          - postgres
         volumes:    
             - "./:/usr/src/app/"
         ports:    
             - "3000:3000"
-    database:
-      image: postgres:10
-      environment:
-        - POSTGRES_USER=backendILoveIt
-        - POSTGRES_PASSWORD=backendILoveIt
-        - POSTGRES_DB=development
-      ports:
-        - 5432:5432
-      volumes:
-        - database_data:/var/lib/postgresql/data

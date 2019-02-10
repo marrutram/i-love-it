@@ -1,6 +1,6 @@
 const Users = require('../models').User;
 const config =  require('../config');
-const CustomError = require('../CustomError');
+const CustomError = require('../customError');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
